@@ -9,36 +9,29 @@
     "@remotion/cli": "4.0.539",
     "@remotion/tailwind": "4.0.539",
     "@remotion/transitions": "^4.0.539",
-    "@remotion/zod-types": "4.0.539",
     "qrcode.react": "^4.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "remotion": "4.0.539",
-    "zod": "4.6.7"
+    "remotion": "4.0.539"
   },
   "devDependencies": {
-    "@remotion/eslint-config": "4.0.539",
-    "@remotion/eslint-plugin": "^4.0.539",
+    "@remotion/eslint-config-flat": "4.0.539",
     "@types/react": "18.3.1",
     "@types/web": "0.0.359",
-    "@typescript-eslint/eslint-plugin": "^8.72.1",
-    "@typescript-eslint/parser": "^8.72.1",
-    "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint": "^10.13.0",
     "prettier": "3.9.10",
     "typescript": "5.5.4"
   },
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render HelloWorld out/video.mp4",
+    "build": "remotion render JobWall out/jobwall.mp4",
     "upgrade": "remotion upgrade",
-    "test": "eslint src --ext ts,tsx,js,jsx && tsc"
+    "test": "eslint src && tsc"
   },
   "sideEffects": [
     "*.css"
   ],
   "overrides": {
-    "zod": "$zod"
+    "zod": "4.6.7"
   }
 }
