@@ -4,7 +4,7 @@ import {QRCodeCanvas} from "qrcode.react";
 import {flip} from "@remotion/transitions/flip";
 import {linearTiming, TransitionSeries} from "@remotion/transitions";
 
-export const JobWall: React.FC<void> = () => {
+export const JobWall: React.FC = () => {
   const {fps, width, height} = useVideoConfig();
 
   const durationPerUrl = fps * 8; // seconds per qr code
@@ -12,7 +12,7 @@ export const JobWall: React.FC<void> = () => {
   return (
     <AbsoluteFill style={{backgroundColor: "#000000"}}>
       <TransitionSeries>
-        {jobs.reverse().flatMap(({title, url, logoUrl, bgColor}, index) => (
+        {jobs.reverse().flatMap(({title, url, logoUrl, bgColor}) => (
           [
             <TransitionSeries.Sequence key={title} durationInFrames={durationPerUrl}>
               <AbsoluteFill style={{backgroundColor: bgColor, color: findFg(bgColor)}}>

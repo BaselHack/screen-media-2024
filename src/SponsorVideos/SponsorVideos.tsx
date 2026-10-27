@@ -14,7 +14,7 @@ export const SponsorVideos = () => {
           >
             <Video
               src={staticFile(`${name}.mp4`)}
-              playbackRate={name == "mdpi" ? 1.5 : 1}
+              playbackRate={name === "mdpi" ? 1.5 : 1}
             />
           </Sequence>
       )))}
