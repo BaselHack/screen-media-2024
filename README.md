@@ -16,6 +16,23 @@ These are the files referenced with the staticFile() function:
 
 ## Commands
 
+With [mise](https://mise.jdx.dev) (`mise.toml` pins Node and wraps the npm scripts):
+
+```console
+mise run                  # render both videos into out/ (default task)
+mise run render           # same as above
+mise run render:jobwall   # out/jobwall.mp4 only
+mise run render:sponsor   # out/sponsorvideos.mp4 only
+mise run studio           # Remotion preview
+mise run check            # eslint + tsc
+mise run clean            # delete out/
+```
+
+`render` checks that `public/eh.mp4` and `public/pax.mp4` exist and skips the render
+when nothing under `src/`, `public/` or the Remotion config changed.
+
+Or directly with npm:
+
 **Install Dependencies**
 
 ```console
@@ -31,7 +48,7 @@ npm start
 **Render video**
 
 ```console
-npx remotion render
+npm run build   # both videos; npm run build:jobwall / build:sponsor for one
 ```
 
 **Upgrade Remotion**
