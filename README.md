@@ -7,7 +7,12 @@ Contains a remotion project with compositions:
 These are intended to be rendered in a video file each.
 
 Raw assets (under public/) are not committed to git, for filesize reasons. We have them in our google drive.
-These are the files referenced with the staticFile() function.
+These are the files referenced with the staticFile() function:
+
+| file in public/ | original file |
+| --- | --- |
+| `eh.mp4` | `260903_eh_evp_kurzclip_friendliness_s03_1x1.mp4` |
+| `pax.mp4` | `RZ_PAX_650_Basel Hack_Spot_02_HIGH.mp4` |
 
 ## Commands
 
