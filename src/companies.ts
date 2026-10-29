@@ -54,7 +54,12 @@ export const pax: CompanyData = {
   bgColor: "#360073",
   filmFile: "pax.mp4",
   filmDurationInSeconds: 30,
-  jobs: []
+  jobs: [
+    {
+      url: "https://ohws.prospective.ch/public/v1/jobs/a367a6e4-25bd-4fe3-b6bd-55ca6bbc950d",
+      title: "Werkstudent IT, Informationssicherheit & Third-Party Risk Management (w/m/d)"
+    }
+  ]
 };
 
 // Order of this list is the order of the rendered program.
