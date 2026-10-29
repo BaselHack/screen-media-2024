@@ -2,13 +2,13 @@
 node = "25.9.0"
 
 # ---------------------------------------------------------------------------
-# Render tasks. `mise run` (no args) renders both videos into out/.
+# Render tasks. `mise run` (no args) renders the screening program into out/.
 # The clips referenced via staticFile() are not in git; see README.md for the
 # source files behind public/eh.mp4 and public/pax.mp4.
 # ---------------------------------------------------------------------------
 
 [tasks.default]
-description = "Render both videos into out/ (same as `mise run render`)"
+description = "Render the screening program into out/ (same as `mise run render`)"
 depends = ["render"]
 
 [tasks.install]
@@ -33,14 +33,19 @@ exit "$status"
 '''
 
 [tasks.render]
-description = "Render JobWall and SponsorVideos into out/"
+description = "Render the screening program (logo slide, film and jobs per company) into out/program.mp4"
 depends = ["install", "assets"]
 sources = ["src/**/*", "public/*.mp4", "remotion.config.ts", "tailwind.config.js", "package.json"]
-outputs = ["out/jobwall.mp4", "out/sponsorvideos.mp4"]
-run = ["npm run build:jobwall", "npm run build:sponsor"]
+outputs = ["out/program.mp4"]
+run = "npm run build:program"
+
+[tasks."render:program"]
+description = "Render the screening program into out/program.mp4"
+depends = ["install", "assets"]
+run = "npm run build:program"
 
 [tasks."render:jobwall"]
-description = "Render the job wall video (EH clip + 4 job slides) into out/jobwall.mp4"
+description = "Render the job wall video (EH film + EH job slides, no logo slide) into out/jobwall.mp4"
 depends = ["install", "assets"]
 run = "npm run build:jobwall"
 
