@@ -1,0 +1,69 @@
+[tools]
+node = "25.9.0"
+
+# ---------------------------------------------------------------------------
+# Render tasks. `mise run` (no args) renders the screening program into out/.
+# The clips referenced via staticFile() are not in git; see README.md for the
+# source files behind public/eh.mp4 and public/pax.mp4.
+# ---------------------------------------------------------------------------
+
+[tasks.default]
+description = "Render the screening program into out/ (same as `mise run render`)"
+depends = ["render"]
+
+[tasks.install]
+description = "Install npm dependencies"
+sources = ["package.json", "package-lock.json"]
+outputs = ["node_modules/.package-lock.json"]
+run = "npm install"
+
+[tasks.assets]
+description = "Check that the clips referenced via staticFile() are present in public/"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+status=0
+for file in public/eh.mp4 public/pax.mp4; do
+  if [[ ! -f "$file" ]]; then
+    echo "missing $file (see the table in README.md for the original file)" >&2
+    status=1
+  fi
+done
+exit "$status"
+'''
+
+[tasks.render]
+description = "Render the screening program (logo slide, film and jobs per company) into out/program.mp4"
+depends = ["install", "assets"]
+sources = ["src/**/*", "public/*.mp4", "remotion.config.ts", "tailwind.config.js", "package.json"]
+outputs = ["out/program.mp4"]
+run = "npm run build:program"
+
+[tasks."render:program"]
+description = "Render the screening program into out/program.mp4"
+depends = ["install", "assets"]
+run = "npm run build:program"
+
+[tasks."render:jobwall"]
+description = "Render the job wall video (EH film + EH job slides, no logo slide) into out/jobwall.mp4"
+depends = ["install", "assets"]
+run = "npm run build:jobwall"
+
+[tasks."render:sponsor"]
+description = "Render the sponsor videos (EH, PAX) into out/sponsorvideos.mp4"
+depends = ["install", "assets"]
+run = "npm run build:sponsor"
+
+[tasks.studio]
+description = "Open the Remotion preview studio"
+depends = ["install"]
+run = "npm start"
+
+[tasks.check]
+description = "Lint and type-check the project (eslint + tsc)"
+depends = ["install"]
+run = "npm test"
+
+[tasks.clean]
+description = "Remove the rendered videos from out/"
+run = "rm -rf out"

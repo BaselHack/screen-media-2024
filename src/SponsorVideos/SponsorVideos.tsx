@@ -1,22 +1,26 @@
-import {AbsoluteFill, Sequence, staticFile, useVideoConfig, Video} from "remotion";
+import {AbsoluteFill, Sequence, staticFile, useVideoConfig} from "remotion";
+import {companies} from "../companies";
+import {FittedVideo} from "../components/FittedVideo";
 
-export const sponsorVideoData = ['eh', 'pax', 'siemens', 'mdpi'];
-export const segDurationSecs = 30;
+export const sponsorVideosDurationInFrames = (fps: number): number =>
+  companies.reduce((total, {filmDurationInSeconds}) => total + Math.round(filmDurationInSeconds * fps), 0);
+
+/** The image films only, one after the other: no logo slides, no job ads. */
 export const SponsorVideos = () => {
   const {fps} = useVideoConfig();
-  return <AbsoluteFill>
-    {(sponsorVideoData.map(
-      ((name, index) =>
-          <Sequence
-            key={name}
-            from={index * fps * segDurationSecs}
-            durationInFrames={segDurationSecs * fps}
-          >
-            <Video
-              src={staticFile(`${name}.mp4`)}
-              playbackRate={name === "mdpi" ? 1.5 : 1}
-            />
-          </Sequence>
-      )))}
-  </AbsoluteFill>
-}
+  const durations = companies.map(({filmDurationInSeconds}) => Math.round(filmDurationInSeconds * fps));
+
+  return (
+    <AbsoluteFill>
+      {companies.map((company, index) => (
+        <Sequence
+          key={company.slug}
+          from={durations.slice(0, index).reduce((total, duration) => total + duration, 0)}
+          durationInFrames={durations[index]}
+        >
+          <FittedVideo src={staticFile(company.filmFile)} />
+        </Sequence>
+      ))}
+    </AbsoluteFill>
+  );
+};

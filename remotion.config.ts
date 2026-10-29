@@ -6,6 +6,8 @@
 import { Config } from "@remotion/cli/config";
 import { enableTailwind } from '@remotion/tailwind';
 
-Config.setVideoImageFormat("jpeg");
+// PNG intermediate frames: JPEG block artefacts show up on the blurred backdrop and
+// on the flat coloured job slides.
+Config.setVideoImageFormat("png");
 Config.setOverwriteOutput(true);
 Config.overrideWebpackConfig(enableTailwind);

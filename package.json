@@ -24,7 +24,10 @@
   },
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render JobWall out/jobwall.mp4",
+    "build": "npm run build:program",
+    "build:program": "remotion render Program out/program.mp4",
+    "build:jobwall": "remotion render JobWall out/jobwall.mp4",
+    "build:sponsor": "remotion render SponsorVideos out/sponsorvideos.mp4",
     "upgrade": "remotion upgrade",
     "test": "eslint src && tsc"
   },

@@ -6,5 +6,8 @@ dist
 # Ignore the output video from Git but not videos you import into src/.
 out
 
+# Raw assets (see README), too large to commit
+public
+
 # TypeScript incremental build cache
 *.tsbuildinfo
