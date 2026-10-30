@@ -4,7 +4,7 @@ node = "25.9.0"
 # ---------------------------------------------------------------------------
 # Render tasks. `mise run` (no args) renders the screening program into out/.
 # The clips referenced via staticFile() are not in git; see README.md for the
-# source files behind public/eh.mp4 and public/pax.mp4.
+# source files behind public/eh.mp4, public/pax.mp4 and public/adobe.mp4.
 # ---------------------------------------------------------------------------
 
 [tasks.default]
@@ -23,7 +23,7 @@ run = '''
 #!/usr/bin/env bash
 set -euo pipefail
 status=0
-for file in public/eh.mp4 public/pax.mp4; do
+for file in public/eh.mp4 public/pax.mp4 public/adobe.mp4; do
   if [[ ! -f "$file" ]]; then
     echo "missing $file (see the table in README.md for the original file)" >&2
     status=1
@@ -50,7 +50,7 @@ depends = ["install", "assets"]
 run = "npm run build:jobwall"
 
 [tasks."render:sponsor"]
-description = "Render the sponsor videos (EH, PAX) into out/sponsorvideos.mp4"
+description = "Render the sponsor videos (EH, Pax, Adobe) into out/sponsorvideos.mp4"
 depends = ["install", "assets"]
 run = "npm run build:sponsor"
 

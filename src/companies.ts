@@ -3,6 +3,16 @@ export interface JobData {
   url: string;
 }
 
+/** Optional overrides for a company's logo slide. */
+export interface SlideOptions {
+  /** Colour of a frame drawn around the slide. */
+  frameColor?: string;
+  /** Logo width in percent of the frame. Defaults to 35. */
+  logoWidthPercent?: number;
+  /** Cut to the film instead of fading: the slide already is the film's title card. */
+  cutToFilm?: boolean;
+}
+
 export interface CompanyData {
   /** Short identifier; also the key prefix of the company's timeline items. */
   slug: string;
@@ -10,6 +20,8 @@ export interface CompanyData {
   logoUrl: string;
   /** Background of the company's logo slide and job slides. */
   bgColor: string;
+  /** Only set when the logo slide has to match the film's own title card. */
+  slide?: SlideOptions;
   /** Image film, relative to public/. */
   filmFile: string;
   filmDurationInSeconds: number;
@@ -62,5 +74,20 @@ export const pax: CompanyData = {
   ]
 };
 
+export const adobe: CompanyData = {
+  slug: "adobe",
+  name: "Adobe",
+  // Official wordmark, already in the red (#EB1000) that adobe.mp4 uses.
+  logoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/90/Adobe_Corporate_wordmark.svg",
+  // adobe.mp4 opens on a white card with the red wordmark, so the slide does too.
+  bgColor: "#FFFFFF",
+  // Same red frame and wordmark size as the title card adobe.mp4 opens with, so the film
+  // continues that card instead of dissolving into it.
+  slide: {frameColor: "#EB1000", logoWidthPercent: 76.6, cutToFilm: true},
+  filmFile: "adobe.mp4",
+  filmDurationInSeconds: 45.7333,
+  jobs: []
+};
+
 // Order of this list is the order of the rendered program.
-export const companies: CompanyData[] = [endress, pax];
+export const companies: CompanyData[] = [endress, pax, adobe];

@@ -12,6 +12,7 @@ These are the files referenced with the staticFile() function:
 | --- | --- |
 | `eh.mp4` | `260903_eh_evp_kurzclip_friendliness_s03_1x1.mp4` |
 | `pax.mp4` | `RZ_PAX_650_Basel Hack_Spot_02_HIGH.mp4` |
+| `adobe.mp4` | the Adobe brand clip (1920×1080, 30 fps, 45.7 s, no audio) |
 
 ## Program running order
 
@@ -21,9 +22,15 @@ These are the files referenced with the staticFile() function:
 2. image film
 3. one slide per job ad (8 s each); a company with an empty `jobs` list gets just slide + film
 
-So with the current data: Endress logo slide → EH film → 4 Endress job ads → Pax logo slide → Pax film.
+So with the current data: Endress logo slide → EH film → 4 Endress job ads → Pax logo slide → Pax film
+→ Adobe logo slide → Adobe film.
 To add job ads (e.g. for Pax), add entries to that company's `jobs` list — the slides and the
 total runtime follow automatically.
+
+A company's logo slide uses its `bgColor` and a 35 % wide logo. `companies.ts` can override that
+through `slide`: Adobe uses it to reproduce the title card its film opens with (white card, red
+wordmark, red frame) and to cut into the film instead of fading, which would dissolve both
+wordmarks over each other.
 
 ## Commands
 
@@ -40,7 +47,7 @@ mise run check            # eslint + tsc
 mise run clean            # delete out/
 ```
 
-`render` checks that `public/eh.mp4` and `public/pax.mp4` exist and skips the render
+`render` checks that `public/eh.mp4`, `public/pax.mp4` and `public/adobe.mp4` exist and skips the render
 when nothing under `src/`, `public/` or the Remotion config changed.
 
 Or directly with npm:
