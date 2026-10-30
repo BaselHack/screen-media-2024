@@ -4,8 +4,8 @@ import {JobWall, jobWallDurationInFrames} from "./JobWall/JobWall";
 import {Program, programDurationInFrames} from "./Program/Program";
 import {sponsorVideosDurationInFrames, SponsorVideos} from "./SponsorVideos/SponsorVideos";
 
-// All source clips are 25 fps, so rendering at 25 fps avoids the duplicate frames
-// (judder) that a 30 fps timeline would produce.
+// The Endress and Pax clips are 25 fps, so a 25 fps timeline avoids the duplicate frames
+// (judder) a 30 fps timeline would produce for them. Remotion resamples the 30 fps Adobe clip.
 const FPS = 25;
 
 // Each <Composition> is an entry in the sidebar!

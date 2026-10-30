@@ -32,7 +32,7 @@ export const companyTimelineItems = (company: CompanyData, fps: number, {withSli
   items.push({
     key: `${company.slug}-film`,
     durationInFrames: Math.round(company.filmDurationInSeconds * fps),
-    transition: withSlide ? "fade" : undefined,
+    transition: withSlide && !company.slide?.cutToFilm ? "fade" : undefined,
     children: <FittedVideo src={staticFile(company.filmFile)} />
   });
 
